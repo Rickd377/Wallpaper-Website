@@ -1,0 +1,36 @@
+nav {
+  @include responsive("mobile-m") {
+    $_nav-height: 70px;
+    @include flex(space-between);
+    position: fixed;
+    left: 50%;
+    bottom: 2rem;
+    transform: translateX(-50%);
+    width: 80%;
+    height: $_nav-height;
+    padding: .3rem;
+    border-radius: $_nav-height / 2;
+    border: 2px solid $white;
+    background: rgba($white, .8);
+    backdrop-filter: blur(3px);
+    box-shadow: 5px 3px 15px rgba($black, .1);
+    overflow: hidden;
+
+    .nav-link {
+      @include flex;
+      height: 100%;
+      aspect-ratio: 1;
+      border-radius: calc($_nav-height / 2 - .3rem);
+      -webkit-tap-highlight-color: transparent;
+
+      i {
+        font-size: 1.6rem;
+
+        &:not(.active) {
+          opacity: .7;
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+}
