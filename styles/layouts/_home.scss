@@ -159,6 +159,10 @@
       box-shadow: 5px 3px 15px rgba($black, .1);
       overflow: hidden;
 
+      .favorite-btn i.clicked {
+        color: darken($pastel-red, 10%);
+      }
+
       & > * {
         flex: 1;
         @include flex;

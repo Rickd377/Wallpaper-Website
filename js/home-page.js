@@ -58,7 +58,8 @@ document.querySelector(".image-popup").addEventListener("click", function(e) {
 });
 
 document.querySelector(".favorite-btn").addEventListener("click", function(e) {
-
+  const heartIcon = this.querySelector("i");
+  heartIcon.classList.toggle("clicked");
 });
 
 document.querySelector(".download-btn").addEventListener("click", function() {

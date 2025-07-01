@@ -246,6 +246,9 @@ body img {
   box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
+.image-popup .popup-container .image-functions .favorite-btn i.clicked {
+  color: #ff808c;
+}
 .image-popup .popup-container .image-functions > * {
   flex: 1;
   display: flex;
