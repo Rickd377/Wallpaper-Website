@@ -11,6 +11,10 @@ document.querySelector(".dropdown-btn").addEventListener("click", (event) => {
 
 document.querySelectorAll(".dropdown-content .option").forEach(option => {
   option.addEventListener('click', function() {
+    document.querySelectorAll(".dropdown-content .option").forEach(opt => {
+      opt.classList.remove('selected');
+    });
+    this.classList.add('selected');
     document.querySelector(".selected-device").textContent = this.textContent;
     document.querySelector('.dropdown-content').classList.remove('open');
     document.querySelector('.dropdown-btn').classList.remove('clicked');
@@ -57,7 +61,7 @@ document.querySelector(".favorite-btn").addEventListener("click", function(e) {
 
 });
 
-document.querySelector(".download-btn").addEventListener("click", function(e) {
+document.querySelector(".download-btn").addEventListener("click", function() {
   const popupImg = document.querySelector(".popup-container img");
   if (popupImg && popupImg.src) {
     const link = document.createElement("a");
@@ -69,8 +73,29 @@ document.querySelector(".download-btn").addEventListener("click", function(e) {
   }
 });
 
-document.querySelector(".share-btn").addEventListener("click", function(e) {
-
+document.querySelector(".copy-btn").addEventListener("click", async function() {
+  const popupImg = document.querySelector(".popup-container img");
+  const copyIcon = this.querySelector("i");
+  if (popupImg && popupImg.src && navigator.clipboard && window.ClipboardItem) {
+    try {
+      const res = await fetch(popupImg.src);
+      const blob = await res.blob();
+      await navigator.clipboard.write([
+        new ClipboardItem({ [blob.type]: blob})
+      ]);
+      copyIcon.className = "fa-solid fa-sharp fa-copy";
+      setTimeout(() => {
+        copyIcon.className = "fa-solid fa-sharp fa-paperclip";
+      }, 1500);
+    } catch (err) {
+      copyIcon.className = "fa-solid fa-sharp fa-xmark";
+      setTimeout(() => {
+        copyIcon.className = "fa-solid fa-sharp fa-paperclip";
+      }, 1500);
+    }
+  } else {
+    alert("Clipboard API not supported in this browser.");
+  }
 });
 
 document.querySelector(".fullsize-btn").addEventListener("click", function() {

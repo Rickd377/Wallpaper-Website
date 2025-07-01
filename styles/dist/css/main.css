@@ -8,7 +8,7 @@
 body {
   line-height: 1;
   min-height: 100dvh;
-  background-color: #f8f8f8;
+  background-color: #faf9f6;
   font-family: "Inter", sans-serif;
   color: #343e54;
   display: flex;
@@ -147,10 +147,14 @@ body img {
     border-top: 0;
   }
   .home-page-header .device-dropdown .dropdown-content .option {
-    padding: 0.7rem;
+    padding: 0.7rem 1rem;
     width: 100%;
     cursor: pointer;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  .home-page-header .device-dropdown .dropdown-content .option.selected {
+    background: #343e54;
+    color: white;
   }
   .home-page-header .device-dropdown .dropdown-content .option:hover {
     background: #ededed;
@@ -183,7 +187,7 @@ body img {
     -moz-column-break-inside: avoid;
          break-inside: avoid;
     border-radius: 0.5rem;
-    filter: drop-shadow(2px 1px 5px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(2px 1px 5px rgba(0, 0, 0, 0.15));
   }
   .home-page #pagination {
     margin-block: -0.5rem 8rem;
@@ -227,7 +231,7 @@ body img {
 .image-popup .popup-container img {
   border-radius: 0.5rem;
   width: 100%;
-  box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.1);
+  filter: drop-shadow(2px 1px 5px rgba(0, 0, 0, 0.1));
 }
 .image-popup .popup-container .image-functions {
   width: 100%;

@@ -64,10 +64,15 @@
           }
 
           .option {
-            padding: .7rem;
+            padding: .7rem 1rem;
             width: 100%;
             cursor: pointer;
             -webkit-tap-highlight-color: $transparent;
+
+            &.selected {
+              background: $accent-blue;
+              color: $white;
+            }
 
             &:hover {
               background: lighten($pastel-gray, 5%);
@@ -101,7 +106,7 @@
         margin-bottom: 1rem;
         break-inside: avoid;
         border-radius: .5rem;
-        filter: drop-shadow(2px 1px 5px rgba($black, .2))
+        filter: drop-shadow(2px 1px 5px rgba($black, .15))
       }
     }
 
@@ -141,7 +146,7 @@
     img {
       border-radius: .5rem;
       width: 100%;
-      box-shadow: 5px 3px 15px rgba($black, .1);
+      filter: drop-shadow(2px 1px 5px rgba($black, .1))
     }
 
     .image-functions {
