@@ -21,18 +21,58 @@ document.querySelectorAll(".dropdown-content .option").forEach(option => {
   });
 });
 
-function createImages() {
-  const imageContainer = document.querySelector(".image-container");
+const IMAGES_PER_PAGE = 24;
+const TOTAL_IMAGES = 100;
+let currentPage = 1;
 
-  for (let i = 0; i < 50; i++) {
+function renderImages(page = 1) {
+  const imageContainer = document.querySelector(".image-container");
+  imageContainer.innerHTML = "";
+
+  const start = (page - 1) * IMAGES_PER_PAGE;
+  const end = Math.min(start + IMAGES_PER_PAGE, TOTAL_IMAGES);
+
+  for (let i = start; i < end; i++) {
     const img = document.createElement("img");
     const randomHeight = Math.floor(Math.random() * 400) + 400;
     img.src = `https://picsum.photos/id/${i}/600/${randomHeight}`;
-    imageContainer.append(img)
+    imageContainer.append(img);
   }
 }
 
-createImages();
+function renderPagination() {
+  const pagination = document.getElementById("pagination");
+  pagination.innerHTML = "";
+  const totalPages = Math.ceil(TOTAL_IMAGES / IMAGES_PER_PAGE);
+
+  const addBtn = (num) => {
+    const btn = document.createElement("button");
+    btn.textContent = num;
+    btn.className = (num === currentPage) ? "active" : "";
+    btn.addEventListener("click", () => {
+      currentPage = num;
+      renderImages(currentPage);
+      renderPagination();
+    });
+    pagination.appendChild(btn);
+  };
+
+  if (totalPages <= 3) {
+    for (let i = 1; i <= totalPages; i++) addBtn(i);
+  } else if (currentPage <= 2) {
+    [1, 2, 3].forEach(addBtn);
+    pagination.insertAdjacentHTML("beforeend", `<span class="dots">...</span>`);
+  } else if (currentPage >= totalPages - 1) {
+    pagination.insertAdjacentHTML("beforeend", `<span class="dots">...</span>`);
+    [totalPages - 2, totalPages - 1, totalPages].forEach(addBtn);
+  } else {
+    pagination.insertAdjacentHTML("beforeend", `<span class="dots">...</span>`);
+    [currentPage - 1, currentPage, currentPage + 1].forEach(addBtn);
+    pagination.insertAdjacentHTML("beforeend", `<span class="dots">...</span>`);
+  }
+}
+renderImages(currentPage);
+renderPagination();
 
 document.querySelector(".image-container").addEventListener("click", function(e) {
   if (e.target.tagName === "IMG") {

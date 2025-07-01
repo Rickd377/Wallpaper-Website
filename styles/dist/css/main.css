@@ -191,6 +191,25 @@ body img {
   }
   .home-page #pagination {
     margin-block: -0.5rem 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  .home-page #pagination span {
+    opacity: 0.4;
+    font-size: 1.3rem;
+  }
+  .home-page #pagination button {
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 1.3rem;
+    padding: 0;
+  }
+  .home-page #pagination button:not(.active) {
+    opacity: 0.4;
   }
 }
 

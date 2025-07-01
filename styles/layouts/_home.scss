@@ -112,6 +112,25 @@
 
     #pagination {
       margin-block: -.5rem 8rem;
+      @include flex;
+      gap: .5rem;
+
+      span {
+        opacity: .4;
+        font-size: 1.3rem;
+      }
+
+      button {
+        background: none;
+        border: none;
+        outline: none;
+        font-size: 1.3rem;
+        padding: 0;
+
+        &:not(.active) {
+          opacity: .4;
+        }
+      }
     }
   }
 }
