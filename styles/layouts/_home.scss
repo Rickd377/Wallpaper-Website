@@ -6,21 +6,23 @@
 
     &-header {
       @include flex(space-between);
+      gap: 1rem;
       width: 100%;
       height: 50px;
     
       .device-dropdown {
         position: relative;
         align-self: start;
-        width: fit-content;
         height: 100%;
+        
 
         .dropdown-btn {
           position: relative;
           z-index: 9999;
           @include flex;
           gap: 1rem;
-          background: $pastel-gray;
+          background: $white;
+          border: 1px solid $pastel-gray;
           padding: 1rem;
           height: 100%;
           border-radius: .5rem;
@@ -32,6 +34,16 @@
             border-radius: .5rem .5rem 0 0;
             border-bottom: 1px solid $accent-blue;
           }
+
+          .seperator {
+            width: 1px;
+            height: 1rem;
+            background: $pastel-gray;
+          }
+
+          .dropdown-icon.rotated {
+            transform: rotate(180deg);
+          }
         }
 
         .dropdown-content {
@@ -39,9 +51,10 @@
           display: none;
           position: absolute;
           z-index: 9998;
-          background: $pastel-gray;
+          width: 100%;
+          background: $white;
           box-shadow: 2px 1px 5px rgba($black, .05);
-          border-radius: 0 .5rem .5rem .5rem;
+          border-radius: 0 0 .5rem .5rem;
           overflow: hidden;
 
           &.open {
@@ -49,13 +62,13 @@
           }
 
           .option {
-            padding: .5rem 1.2rem;
+            padding: .7rem;
             width: 100%;
             cursor: pointer;
             -webkit-tap-highlight-color: $transparent;
 
             &:hover {
-              background: darken($pastel-gray, 5%);
+              background: lighten($pastel-gray, 5%);
             }
           }
         }
@@ -92,6 +105,63 @@
 
     #pagination {
       margin-block: -.5rem 8rem;
+    }
+  }
+}
+
+.image-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  @include flex;
+  display: none;
+  background: rgba($black, .5);
+  backdrop-filter: blur(1px);
+
+  .popup-container {
+    @include flex(start, start, column);
+    gap: 1rem;
+    width: 80%;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 2px solid $white;
+    background: rgba($white, .8);
+    backdrop-filter: blur(3px);
+    box-shadow: 5px 3px 15px rgba($black, .1);
+
+    .close-popup {
+      font-size: 1.3rem;
+      align-self: end;
+      cursor: pointer;
+      -webkit-tap-highlight-color: $transparent;
+    }
+
+    img {
+      border-radius: .5rem;
+      width: 100%;
+      box-shadow: 5px 3px 15px rgba($black, .1);
+    }
+
+    .image-functions {
+      width: 100%;
+      @include flex;
+      height: 45px;
+      background: $accent-blue;
+      color: $white;
+      border-radius: .5rem;
+      box-shadow: 5px 3px 15px rgba($black, .1);
+      overflow: hidden;
+
+      & > * {
+        flex: 1;
+        @include flex;
+        height: 100%;
+        -webkit-tap-highlight-color: $transparent;
+
+        &:hover {
+          background: lighten($accent-blue, 5%);
+        }
+      }
     }
   }
 }

@@ -45,8 +45,9 @@
     <div class="home-page-header">
       <div class="device-dropdown">
         <div class="dropdown-btn">
-          <span class="selected-device">All</span>
-          <i class="fa-solid fa-sharp fa-caret-down"></i>
+          <span class="selected-device">Select device</span>
+          <div class="seperator"></div>
+          <i class="fa-solid fa-sharp fa-caret-down dropdown-icon"></i>
         </div>
         <div class="dropdown-content">
           <div class="option">All</div>
@@ -63,6 +64,26 @@
     <div class="image-container"></div>
     <div id="pagination">pagination</div>
   </main>
+
+  <div class="image-popup">
+    <div class="popup-container">
+      <i class="fa-solid fa-sharp fa-xmark close-popup"></i>
+      <div class="image-functions">
+        <div class="favorite-btn" title="Favorite">
+          <i class="fa-solid fa-sharp fa-heart"></i>
+        </div>
+        <div class="download-btn" title="Download">
+          <i class="fa-solid fa-sharp fa-download"></i>
+        </div>
+        <div class="share-btn" title="Share">
+          <i class="fa-solid fa-sharp fa-share"></i>
+        </div>
+        <div class="fullsize-btn" title="Full Size">
+          <i class="fa-solid fa-sharp fa-expand"></i>
+        </div>
+      </div>
+    </div>
+  </div>
   
   <script src="./js/home-page.js"></script>
 </body>
