@@ -3,6 +3,7 @@ nav {
     $_nav-height: 70px;
     @include flex(space-between);
     position: fixed;
+    z-index: 99999;
     left: 50%;
     bottom: 2rem;
     transform: translateX(-50%);

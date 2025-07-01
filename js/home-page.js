@@ -58,14 +58,22 @@ document.querySelector(".favorite-btn").addEventListener("click", function(e) {
 });
 
 document.querySelector(".download-btn").addEventListener("click", function(e) {
-
+  const popupImg = document.querySelector(".popup-container img");
+  if (popupImg && popupImg.src) {
+    const link = document.createElement("a");
+    link.href = popupImg.src;
+    link.download = "Vividly_Wallpaper.png";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 });
 
 document.querySelector(".share-btn").addEventListener("click", function(e) {
 
 });
 
-document.querySelector(".fullsize-btn").addEventListener("click", function(e) {
+document.querySelector(".fullsize-btn").addEventListener("click", function() {
   const popupImg = document.querySelector(".popup-container img");
   if (popupImg && popupImg.src) {
     window.open(popupImg.src, "_blank")
