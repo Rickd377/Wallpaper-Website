@@ -22,20 +22,17 @@ document.querySelectorAll(".dropdown-content .option").forEach(option => {
 });
 
 const IMAGES_PER_PAGE = 24;
-const TOTAL_IMAGES = 100;
 let currentPage = 1;
 
 function renderImages(page = 1) {
   const imageContainer = document.querySelector(".image-container");
   imageContainer.innerHTML = "";
-
   const start = (page - 1) * IMAGES_PER_PAGE;
-  const end = Math.min(start + IMAGES_PER_PAGE, TOTAL_IMAGES);
+  const end = Math.min(start + IMAGES_PER_PAGE, uploadImages.length);
 
   for (let i = start; i < end; i++) {
     const img = document.createElement("img");
-    const randomHeight = Math.floor(Math.random() * 400) + 400;
-    img.src = `https://picsum.photos/id/${i}/600/${randomHeight}`;
+    img.src = uploadImages[i];
     imageContainer.append(img);
   }
 }
@@ -43,7 +40,7 @@ function renderImages(page = 1) {
 function renderPagination() {
   const pagination = document.getElementById("pagination");
   pagination.innerHTML = "";
-  const totalPages = Math.ceil(TOTAL_IMAGES / IMAGES_PER_PAGE);
+  const totalPages = Math.ceil(uploadImages.length / IMAGES_PER_PAGE);
 
   const addBtn = (num) => {
     const btn = document.createElement("button");
@@ -71,6 +68,7 @@ function renderPagination() {
     pagination.insertAdjacentHTML("beforeend", `<span class="dots">...</span>`);
   }
 }
+
 renderImages(currentPage);
 renderPagination();
 
@@ -119,16 +117,28 @@ document.querySelector(".copy-btn").addEventListener("click", async function() {
   const copyIcon = this.querySelector("i");
   if (popupImg && popupImg.src && navigator.clipboard && window.ClipboardItem) {
     try {
-      const res = await fetch(popupImg.src);
-      const blob = await res.blob();
+      const img = new window.Image();
+      img.crossOrigin = "anonymous";
+      img.src = popupImg.src;
+      await img.decode();
+
+      const canvas = document.createElement("canvas");
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+
       await navigator.clipboard.write([
-        new ClipboardItem({ [blob.type]: blob})
+        new ClipboardItem({ "image/png": blob })
       ]);
       copyIcon.className = "fa-solid fa-sharp fa-copy";
       setTimeout(() => {
         copyIcon.className = "fa-solid fa-sharp fa-paperclip";
       }, 1500);
     } catch (err) {
+      console.error("Clipboard copy error:", err);
       copyIcon.className = "fa-solid fa-sharp fa-xmark";
       setTimeout(() => {
         copyIcon.className = "fa-solid fa-sharp fa-paperclip";

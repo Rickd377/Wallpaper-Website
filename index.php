@@ -62,10 +62,7 @@
       </div>
     </div>
     <div class="image-container">
-      <img src="./assets/blue-icon.png" alt="">
-      <img src="./assets/brown-icon.png" alt="">
-      <img src="./assets/blue-icon.png" alt="">
-      <img src="./assets/Modern-house-with-pool.jpg" alt="">
+      <?php include_once './subscripts/getImages.php'; ?>
     </div>
     <div id="pagination"></div>
   </main>
